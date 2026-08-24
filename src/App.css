@@ -1,0 +1,98 @@
+.app {
+    max-width: 90%;
+    margin: 30px auto;
+    padding: 20px;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    text-align: center;
+    border: 2px solid white;
+    border-radius: 15px;
+}
+
+.app h1 {
+    font-size: 3vw;
+    letter-spacing: 0.1vw;
+    margin: 30px 5px;
+    font-family: cursive;
+}
+
+.app h2 {
+    font-size: 2vw;
+}
+
+.app p {
+    font-size: 1.5vw;
+    font-family: 'Times New Roman', Times, serif;
+}
+
+.expense-container {
+    display: flex;
+    gap: 4vw;
+    margin: 4vh 2vw;
+    justify-content: center;
+}
+
+.expense-container section {
+    background: black;
+    padding: 2vw;
+    border: 2px solid white;
+    border-radius: 15px;
+    min-height: 100px;
+    max-height: 500px;
+    flex: 1;
+    overflow-y: auto;
+}
+
+@media (max-width: 768px) {
+
+    .app {
+        max-width: 90%;
+        margin: 20px auto;
+        padding: 15px;
+    }
+
+    .app h1 {
+        font-size: 8vw;
+    }
+
+    .app h2 {
+        font-size: 6vw;
+    }
+
+    .app p {
+        font-size: 5vw;
+    }
+
+    .expense-container {
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+        margin: 30px 10px;
+    }
+
+    .expense-container section {
+        padding: 30px;
+    }
+}
+
+
+/*--Form--*/
+
+
+.expense-container form {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.expense-container input,
+.expense-container select {
+    padding: 10px;
+    border-radius: 6px;
+    border: 1px solid grey
+}
+
+.expense-container button {
+    padding: 10px;
+    border-radius: 6px;
+    cursor: pointer;
+}
