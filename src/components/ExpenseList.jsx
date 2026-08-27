@@ -15,11 +15,12 @@ function ExpenseList({
                         <h3>{expense.title}</h3>
                         <p>₹{expense.amount}</p>
                         <p>{expense.category}</p>
+                        <p>{expense.date}</p>
 
-                        <button onClick={()=> onEditExpense(expense.id)}>
+                        <button onClick={() => onEditExpense(expense.id)}>
                             Edit
                         </button>
-                        
+
                         <button onClick={() => onDeleteExpense(expense.id)}>
                             Delete
                         </button>

@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 
 function ExpenseFrom({ onAddExpenses, editingExpense, onUpdateExpense }) {
@@ -6,12 +6,16 @@ function ExpenseFrom({ onAddExpenses, editingExpense, onUpdateExpense }) {
     const [title, setTitle] = useState("");
     const [amount, setAmount] = useState("");
     const [category, setCategory] = useState("Food");
+    const [date, setDate] = useState("");
+
+    const titleInputRef = useRef(null);
 
     useEffect(() => {
         if (editingExpense) {
             setTitle(editingExpense.title);
             setAmount(editingExpense.amount);
             setCategory(editingExpense.category);
+            setDate(editingExpense.date);
         }
     }, [editingExpense]);
 
@@ -27,7 +31,8 @@ function ExpenseFrom({ onAddExpenses, editingExpense, onUpdateExpense }) {
                 ...editingExpense,
                 title,
                 amount: Number(amount),
-                category
+                category,
+                date
             };
 
             onUpdateExpense(updatedExpense);
@@ -37,7 +42,8 @@ function ExpenseFrom({ onAddExpenses, editingExpense, onUpdateExpense }) {
                 id: Date.now(),
                 title,
                 amount: Number(amount),
-                category
+                category,
+                date
             };
 
             onAddExpenses(newExpenses);
@@ -47,17 +53,25 @@ function ExpenseFrom({ onAddExpenses, editingExpense, onUpdateExpense }) {
         setTitle("");
         setAmount("");
         setCategory("Food");
+
+        titleInputRef.current?.focus();
     };
+
+    useEffect(() => {
+        titleInputRef.current?.focus();
+    }, []);
 
     return (
         <form onSubmit={handleSubmit}>
             <lable>Title</lable>
 
             <input
+                ref={titleInputRef}
                 type="text"
                 value={title}
                 onChange={(e) => setTitle(e.target.value)}
-                placeholder="Enter expense title" />
+                placeholder="Enter expense title"
+            />
 
             <lable>Amount</lable>
 
@@ -80,6 +94,13 @@ function ExpenseFrom({ onAddExpenses, editingExpense, onUpdateExpense }) {
                 <option value="Bills">Bills</option>
                 <option value="Other">Other</option>
             </select>
+
+            <lable>Date</lable>
+            <input
+                type="date"
+                value={date}
+                onChange={(e) => setDate(e.target.value)}
+            />
 
             <button type="submit">
                 {editingExpense ? "Update Expense" : "Add Expense"}

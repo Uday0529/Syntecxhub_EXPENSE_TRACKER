@@ -1,98 +1,478 @@
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    min-height: 100vh;
+    background: #0b0b10;
+    color: #f5f5f7;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+
+/* 
+   MAIN APP
+*/
+
 .app {
-    max-width: 90%;
-    margin: 30px auto;
-    padding: 20px;
-    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    width: 92%;
+    max-width: 1250px;
+    margin: 0 auto;
+    padding: 40px 0;
+}
+
+
+/* 
+   HEADER
+*/
+
+.app>h1 {
     text-align: center;
-    border: 2px solid white;
-    border-radius: 15px;
+    font-size: clamp(32px, 4vw, 52px);
+    font-weight: 700;
+    margin-bottom: 8px;
+
+    background: linear-gradient(90deg,
+            #a855f7,
+            #6366f1,
+            #22d3ee);
+
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
 }
 
-.app h1 {
-    font-size: 3vw;
-    letter-spacing: 0.1vw;
-    margin: 30px 5px;
-    font-family: cursive;
+.app>h2 {
+    text-align: center;
+    color: #8f8f9d;
+    font-size: 16px;
+    font-weight: 400;
+    margin-bottom: 5px;
 }
 
-.app h2 {
-    font-size: 2vw;
+.app>p {
+    text-align: center;
+    font-size: clamp(30px, 4vw, 48px);
+    font-weight: 700;
+    margin-bottom: 40px;
+
+    color: #ffffff;
 }
 
-.app p {
-    font-size: 1.5vw;
-    font-family: 'Times New Roman', Times, serif;
-}
+
+/* MAIN LAYOUT----------------------------------------------------------------------------- */
 
 .expense-container {
-    display: flex;
-    gap: 4vw;
-    margin: 4vh 2vw;
-    justify-content: center;
-}
+    display: grid;
 
-.expense-container section {
-    background: black;
-    padding: 2vw;
-    border: 2px solid white;
-    border-radius: 15px;
-    min-height: 100px;
-    max-height: 500px;
-    flex: 1;
-    overflow-y: auto;
-}
+    grid-template-columns: minmax(280px, 360px) 1fr;
 
-@media (max-width: 768px) {
+    grid-template-rows: auto 1fr;
 
-    .app {
-        max-width: 90%;
-        margin: 20px auto;
-        padding: 15px;
-    }
+    gap: 20px;
 
-    .app h1 {
-        font-size: 8vw;
-    }
-
-    .app h2 {
-        font-size: 6vw;
-    }
-
-    .app p {
-        font-size: 5vw;
-    }
-
-    .expense-container {
-        display: flex;
-        flex-direction: column;
-        gap: 20px;
-        margin: 30px 10px;
-    }
-
-    .expense-container section {
-        padding: 30px;
-    }
+    align-items: start;
 }
 
 
-/*--Form--*/
+/* FORM CARD --------------------------------------------------------------------*/
 
+.expense-container>section:first-child {
+    grid-column: 1;
+    grid-row: 1 / 3;
 
+    background: #13131a;
+
+    border: 1px solid #272733;
+
+    border-radius: 20px;
+
+    padding: 25px;
+
+    box-shadow:
+        0 10px 40px rgba(0, 0, 0, 0.35);
+}
+
+/* form --------------------------------------*/
 .expense-container form {
     display: flex;
     flex-direction: column;
     gap: 10px;
 }
 
-.expense-container input,
-.expense-container select {
-    padding: 10px;
-    border-radius: 6px;
-    border: 1px solid grey
+.expense-container label {
+    color: #b5b5c3;
+
+    font-size: 14px;
+
+    font-weight: 600;
+
+    margin-top: 8px;
 }
 
+
+.expense-container .form-control,
+.expense-container .form-select,
+.expense-container input,
+.expense-container select {
+    width: 100%;
+
+    background: #1b1b24;
+
+    color: #ffffff;
+
+    border: 1px solid #30303d;
+
+    border-radius: 10px;
+
+    padding: 11px 13px;
+
+    font-size: 15px;
+
+    transition: 0.2s;
+}
+
+
+/* Placeholder */
+
+.expense-container input::placeholder {
+    color: #666674;
+}
+
+
+/* Focus */
+
+.expense-container .form-control:focus,
+.expense-container .form-select:focus,
+.expense-container input:focus,
+.expense-container select:focus {
+    background: #1b1b24;
+
+    color: white;
+
+    border-color: #8b5cf6;
+
+    box-shadow: 0 0 0 3px rgba(139, 92, 246, 0.15);
+
+    outline: none;
+}
+
+
+/* BUTTON ---------------------------------------------------------------------------------------- */
+
+.expense-container .btn-primary,
 .expense-container button {
-    padding: 10px;
-    border-radius: 6px;
+    margin-top: 12px;
+
+    width: 100%;
+
+    padding: 11px 15px;
+
+    border: none;
+
+    border-radius: 10px;
+
+    background: linear-gradient(135deg,
+            #7c3aed,
+            #9333ea);
+
+    color: white;
+
+    font-size: 15px;
+
+    font-weight: 600;
+
     cursor: pointer;
+
+    transition: 0.2s;
+}
+
+.expense-container .btn-primary:hover,
+.expense-container button:hover {
+    transform: translateY(-1px);
+
+    box-shadow:
+        0 8px 20px rgba(124, 58, 237, 0.3);
+}
+
+
+/* SEARCH + FILTER ------------------------------------------------------------*/
+
+.filters {
+    grid-column: 2;
+    grid-row: 1;
+
+    display: grid;
+
+    grid-template-columns: 1fr 190px;
+
+    gap: 12px;
+
+    background: #13131a;
+
+    border: 1px solid #272733;
+
+    border-radius: 16px;
+
+    padding: 15px;
+}
+
+
+/* Search input */
+
+.filters input {
+    width: 100%;
+
+    background: #1b1b24;
+
+    color: white;
+
+    border: 1px solid #30303d;
+
+    border-radius: 10px;
+
+    padding: 11px 14px;
+
+    outline: none;
+}
+
+.filters input:focus {
+    border-color: #8b5cf6;
+
+    box-shadow:
+        0 0 0 3px rgba(139, 92, 246, 0.12);
+}
+
+
+/* Category */
+
+.filters select {
+    width: 100%;
+
+    background: #1b1b24;
+
+    color: white;
+
+    border: 1px solid #30303d;
+
+    border-radius: 10px;
+
+    padding: 11px;
+
+    outline: none;
+}
+
+.filters select:focus {
+    border-color: #8b5cf6;
+}
+
+
+/* EXPENSE LIST CARD ----------------------------------------------------------------*/
+
+.expense-container>section:last-child {
+    grid-column: 2;
+    grid-row: 2;
+
+    background: #13131a;
+
+    border: 1px solid #272733;
+
+    border-radius: 20px;
+
+    padding: 20px;
+
+    min-height: 300px;
+
+    max-height: 600px;
+
+    overflow-y: auto;
+
+    box-shadow:
+        0 10px 40px rgba(0, 0, 0, 0.3);
+}
+
+
+/* Scrollbar */
+
+.expense-container>section:last-child::-webkit-scrollbar {
+    width: 6px;
+}
+
+.expense-container>section:last-child::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+.expense-container>section:last-child::-webkit-scrollbar-thumb {
+    background: #3a3a49;
+
+    border-radius: 10px;
+}
+
+
+/* EXPENSE ITEMS --------------------------------------------------------------------------- */
+
+.expense-container section:last-child>div {
+    background: #181820;
+
+    border: 1px solid #292934;
+
+    border-radius: 14px;
+
+    padding: 15px;
+
+    margin-bottom: 10px;
+
+    transition: 0.2s;
+}
+
+.expense-container section:last-child>div:hover {
+    border-color: #49495c;
+
+    transform: translateY(-1px);
+}
+
+
+/* Expense text */
+
+.expense-container section:last-child p {
+    color: #a5a5b3;
+
+    margin: 4px 0;
+
+    font-size: 14px;
+}
+
+
+/* EDIT / DELETE BUTTONS -----------------------------------------------------------*/
+
+.expense-container section:last-child button {
+    width: auto;
+
+    margin-top: 8px;
+
+    padding: 7px 12px;
+
+    font-size: 13px;
+
+    border-radius: 8px;
+}
+
+
+/* EMPTY / LOADING / ERROR-----------------------------------------------------------------------*/
+
+.expense-container section:last-child>p {
+    text-align: center;
+
+    padding: 50px 20px;
+
+    color: #777786;
+
+    font-size: 15px;
+}
+
+
+/* MOBILE -------------------------------------------------------------------------*/
+
+@media (max-width: 768px) {
+
+    .app {
+        width: 94%;
+
+        padding: 25px 0;
+    }
+
+
+    .app>h1 {
+        font-size: 34px;
+    }
+
+
+    .app>h2 {
+        font-size: 14px;
+    }
+
+
+    .app>p {
+        font-size: 36px;
+
+        margin-bottom: 25px;
+    }
+
+
+    .expense-container {
+
+        display: flex;
+
+        flex-direction: column;
+
+        gap: 15px;
+    }
+
+
+    /* Form */
+
+    .expense-container>section:first-child {
+
+        width: 100%;
+
+        padding: 20px;
+
+        border-radius: 18px;
+    }
+
+
+    /* Filters */
+
+    .filters {
+
+        width: 100%;
+
+        display: flex;
+
+        flex-direction: column;
+
+        gap: 10px;
+
+        padding: 12px;
+
+        border-radius: 15px;
+    }
+
+
+    /* Expense list */
+
+    .expense-container>section:last-child {
+
+        width: 100%;
+
+        max-height: 500px;
+
+        padding: 15px;
+
+        border-radius: 18px;
+    }
+
+}
+
+
+/* SMALL MOBILE ------------------------------------------------------------------------*/
+
+@media (max-width: 400px) {
+
+    .app {
+        width: 95%;
+    }
+
+    .app>h1 {
+        font-size: 29px;
+    }
+
+    .app>p {
+        font-size: 32px;
+    }
+
+    .expense-container>section:first-child {
+        padding: 15px;
+    }
+
 }
